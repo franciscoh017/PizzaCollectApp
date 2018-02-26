@@ -1,0 +1,16 @@
+{
+    "companies": [
+        {
+            "id": 1,
+            "name": "Little Caesars",
+            "price": 300,
+            "pieces": 8
+        },
+        {
+            "id": 2,
+            "name": "Price Smart",
+            "price": 450,
+            "pieces": 12
+        }
+    ]
+  }
