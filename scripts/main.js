@@ -4,10 +4,10 @@ const pizzaSelect = document.getElementById("companySelect");
 $.getJSON(
     {
     // Insert your API url Here
-        url: "http://localhost:3000/companies",
+        url: "/scripts/pizzaAPI.json",
         success(response)
         {
-            companies = response;
+            companies = response.companies;
             companies.forEach(company => {
                 const option = document.createElement("option");
                 option.text = company.name;
