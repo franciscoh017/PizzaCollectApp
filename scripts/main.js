@@ -1,19 +1,24 @@
 var companies;
 const pizzaSelect = document.getElementById("companySelect");
 
-$.getJSON({
+$.getJSON(
+    {
     // Insert your API url Here
-    url: "http://localhost:3000/companies",
-    success(response){
-        console.log(response);
-        companies = response;
-        companies.forEach(company => {
-            const option = document.createElement("option");
-            option.text = company.name;
-            pizzaSelect.add(option);
-        });
+        url: "http://localhost:3000/companies",
+        success(response)
+        {
+            companies = response;
+            companies.forEach(company => {
+                const option = document.createElement("option");
+                option.text = company.name;
+                pizzaSelect.add(option);
+            });
+        },
+        error(jqXHR,status,error)
+        {
+            console.error(jqXHR);
+        }
     }
-}
 );
 
 function setPrice(){
@@ -33,11 +38,9 @@ function checkValue(control){
 }
 
 function buildString(stringContent){
-
     const p = document.createElement("p");
-    p.innerText = stringContent;
+    p.innerHTML = stringContent;
     return p;
-
 }
 
 function cleanResult(){
@@ -51,8 +54,10 @@ function calculate(){
     if(document.getElementById("companySelect").value==""){
         return alert("Seleccione una Pizzería");
     }
+
     const peopleQty = document.getElementById("peopleQty").value;
     const servings = document.getElementById("servings").value;
+    
     if(peopleQty < 1  || servings < 1 ){
         alert("La cantidad definida debe ser mayor a 0");
     }
@@ -83,15 +88,14 @@ function calculate(){
 
         const resultParagraph = document.getElementById("result-text");
         resultParagraph.innerText = "";
-        console.log(resultParagraph);
 
         var resultArr = new Array(
-            buildString("Pizzería: " + pizzaSelect.value),
-            buildString("Precio por Persona: " + pricePerPerson),
-            buildString("Pedazos por Persona: " + servings),
-            buildString("Total de pedazos: " + totalPizzaPieces),
-            buildString("Total de pizzas: " + totalPizzas),
-            buildString("Pedazos restantes: " + remainingPieces)
+            buildString("<b>Pizzería: </b>" + pizzaSelect.value),
+            buildString("<b>Precio por Persona: </b>" + pricePerPerson),
+            buildString("<b>Pedazos por Persona: </b>" + servings),
+            buildString("<b>Total de pedazos: </b>" + totalPizzaPieces),
+            buildString("<b>Total de pizzas: </b>" + totalPizzas),
+            buildString("<b>Pedazos restantes: </b>" + remainingPieces)
         );
 
         resultArr.forEach(result => {
